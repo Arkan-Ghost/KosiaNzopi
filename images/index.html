@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kosia Nzopi-FFF</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            :root {
+                --primary: #226D68;
+                --secondary: #18534F;
+                --accent: #0070c0;
+                --light: #ECF8F6;
+                --dark: #D6955B;
+                --gray: #FEEAA1;
+                --white: #ffffff;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                background-color: var(--white);
+                color: var(--dark);
+                line-height: 1.6;
+                overflow-x: hidden;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Navigation */
+            nav {
+                background-color: var(--dark);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+            
+            .nav-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 0;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--light);
+            }
+            
+            .logo span {
+                color: var(--primary);
+            }
+            
+            .nav-links {
+                display: flex;
+                list-style: none;
+                transition: all 0.4s ease;
+            }
+            
+            .nav-links li {
+                margin-left: 30px;
+            }
+            
+            .nav-links a {
+                text-decoration: none;
+                color: var(--light);
+                font-weight: 600;
+                font-size: 1rem;
+                transition: color 0.3s;
+                position: relative;
+            }
+            
+            .nav-links a:hover {
+                color: var(--primary);
+            }
+            
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary);
+                transition: width 0.3s;
+            }
+            
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(rgba(0, 0, 0, 0.352), rgba(0, 0, 0, 0.6)), url('./images/scott-goodwill-CtRE4_4L7b8-unsplash.jpg') no-repeat center center/cover;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--light);
+                padding: 120px 0;
+                text-align: center;
+                margin-top: 60px;
+                position: relative;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                margin-bottom: 15px;
+                animation: fadeInDown 1s;
+            }
+            
+            .hero-content h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+                font-weight: 300;
+                margin-bottom: 30px;
+                animation: fadeInUp 1s;
+            }
+
+            .hero-content p {
+                margin-bottom: 30px;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                color: var(--light);
+            }
+            
+            .cta-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 30px;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 12px 28px;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                text-align: center;
+                min-width: 180px;
+            }
+            
+            .btn-primary {
+                background: var(--light);
+                color: var(--primary);
+                border: 2px solid var(--light);
+            }
+            
+            .btn-outline {
+                background: transparent;
+                color: var(--light);
+                border: 2px solid var(--light);
+            }
+        
+            .btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Services Section */
+            .services {
+                padding: 100px 5%;
+                text-align: center;
+                background-color: var(--light);
+            }
+            
+            .section-title {
+                font-size: 36px;
+                color: var(--primary);
+                margin-bottom: 60px;
+                position: relative;
+                display: inline-block;
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            
+            .section-title.animate {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .section-title::after {
+                content: '';
+                position: absolute;
+                bottom: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background-color: var(--accent);
+            }
+            
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                margin-top: 50px;
+            }
+
+            .service-card {
+                background-color: var(--white);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                transition: transform 0.3s, box-shadow 0.3s;
+                transform: translateY(50px);
+                opacity: 1;
+            }
+            
+            .service-card.animate {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .service-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            }
+
+            .service-img1 {
+                height: 200px;
+                background-color: var(--primary);
+                background: url('./images/farinedemais.png') no-repeat center center/cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 60px;
+                transition: all 0.3s ease;
+            }
+
+            .service-img2 {
+                height: 200px;
+                background-color: var(--primary);
+                background: url('./images/Maïs25-01-29_16-06-55-255.png') no-repeat center center/cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 60px;
+                transition: all 0.3s ease;
+            }
+            
+            .service-img3 {
+                height: 200px;
+                background-color: var(--primary);
+                background: url('./images/rizblanc.png') no-repeat center center/cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 60px;
+                transition: all 0.3s ease;
+            }
+
+            .service-img4 {
+                height: 200px;
+                background-color: var(--primary);
+                background: url('./images/farinedemais.png') no-repeat center center/cover;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 60px;
+                transition: all 0.3s ease;
+            }
+
+            .service-card:hover .service-img {
+                background-color: var(--secondary);
+            }
+            
+            .service-content {
+                padding: 30px;
+                text-align: center;
+            }
+            
+            .service-content h3 {
+                font-size: 24px;
+                margin-bottom: 15px;
+                color: var(--primary);
+            }
+            
+            .service-content p {
+                color: var(--gray);
+                margin-bottom: 20px;
+            }
+
+            /* About Section */
+            .about {
+                padding: 100px 5%;
+                background-color: var(--light);
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 50px;
+            }
+            
+            .about-content {
+                flex: 1;
+                min-width: 300px;
+                transform: translateX(-50px);
+                opacity:0;
+            }
+            
+            .about-content.animate {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            
+            .about-content h2 {
+                font-size: 36px;
+                color: var(--primary);
+                margin-bottom: 25px;
+            }
+            
+            .about-content p {
+                margin-bottom: 20px;
+                color: var(--gray);
+            }
+            
+            .about-img {
+                width: 100%;
+                height: 0;
+                padding-bottom: 35%; /* Ratio 4:3 */
+                background-size: cover;
+                background-position: center;
+                flex: 1;
+                min-width: 300px;
+                height: 400px;
+                background-color: var(--primary);
+                background: url('./images/team.jpeg') no-repeat center center/cover;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            
+            .about-img.animate {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            /* Footer */
+            footer {
+                background-color: var(--secondary);
+                color: white;
+                padding: 70px 5% 30px;
+            }
+            
+            .footer-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+                margin-bottom: 50px;
+            }
+            
+            .footer-logo {
+                margin-bottom: 20px;
+            }
+            
+            .footer-logo h3 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .footer-logo p {
+                opacity: 0.8;
+                margin-bottom: 20px;
+            }
+            
+            .footer-links h4 {
+                font-size: 20px;
+                margin-bottom: 25px;
+                position: relative;
+                padding-bottom: 10px;
+            }
+            
+            .footer-links h4::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background-color: var(--accent);
+            }
+            
+            .footer-links ul {
+                list-style: none;
+            }
+            
+            .footer-links ul li {
+                margin-bottom: 12px;
+            }
+            
+            .footer-links ul li a {
+                color: rgba(255,255,255,0.8);
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+            
+            .footer-links ul li a:hover {
+                color: white;
+            }
+            
+            .footer-contact .contact-item {
+                margin-bottom: 20px;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            
+            .social-icons a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50px;
+                height: 50px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                color: var(--light);
+                font-size: 1.5rem;
+                transition: all 0.3s;
+            }
+            
+            .social-icons a:hover {
+                background: var(--primary);
+                transform: translateY(-5px);
+            }
+            
+            .copyright {
+                text-align: center;
+                padding-top: 30px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                opacity: 0.7;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 992px) {
+                .hero h1 {
+                    font-size: 40px;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .mobile-menu {
+                    display: block;
+                }
+                
+                nav {
+                    position: fixed;
+                    top: 90px;
+                    left: -100%;
+                    width: 80%;
+                    height: calc(100vh - 90px);
+                    background-color: var(--white);
+                    transition: left 0.3s;
+                    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+                }
+                
+                nav.active {
+                    left: 0;
+                }
+                
+                nav ul {
+                    flex-direction: column;
+                    padding: 30px;
+                }
+                
+                nav ul li {
+                    margin: 0 0 20px 0;
+                }
+                
+                .hero h1 {
+                    font-size: 32px;
+                }
+                
+                .hero p {
+                    font-size: 18px;
+                }
+                
+                .hero-buttons {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+                
+                .btn {
+                    width: 100%;
+                }
+                
+                .about {
+                    flex-direction: column;
+                }
+                
+                .contact-container {
+                    flex-direction: column;
+                }
+            }
+            
+            /* Animations générales */
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            .floating {
+                animation: float 4s ease-in-out infinite;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <nav>
+                <div class="container nav-container">
+                    <div class="logo-placeholder floating"></div>
+                    <div class="logo">Kosia Nzopi<span>FFF</span></div>
+                    <ul class="nav-links" id="navLinks">
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#services">Nos services</a></li>
+                        <li><a href="#about">À Propos</a></li>
+                        <li><a href="#produits">Nos produits</a></li>
+                        <li><a href="#produits">Nos projets</a></li>
+                        <li><a href="#sell">Vente</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1>De nos champs à votre table -Des céréales 100% locales, saines et abordables</h1>
+                <h2>Chez KN FFF Nzopi, nous transformons le mais, le riz, le sorgho et le soja produits par nos agriculteurs locaux en aliments de qualité, pour nourrir notre communauté et soutenir l'économie régionale.</h2>
+                <div class="cta-buttons">
+                    <a href="#portfolio" class="btn btn-primary">Voir nos produits</a>
+                    <a href="#contact" class="btn btn-outline">Nous contacter</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <h2 class="section-title">Nos Services</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img1">
+                        <i class="fas fa-industry floating"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Transformation céréalière</h3>
+                        <p>Nous transformons le Riz, le mais,le sorgho et le soja en produits finis prets à la consommation, dans le respect des standards de qualité.</p>
+                        <a href="#" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img2">
+                        <i class="fas fa-tools floating"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Production d'aliments pour animaux</h3>
+                        <p>Les sous-produits (son,brisures) servent à produire une alimentation nutritive pour l'élevage de volaille et la pisciculture.</p>
+                        <a href="#" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img3">
+                        <i class="fas fa-users floating"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Distrubution locale et régionale</h3>
+                        <p>Nous livrons directement aux marchés, grossistes, institutions(écoles, hopitaux, ONG) et revendeurs dans tout le Haut-Uélé.</p>
+                        <a href="#" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">En savoir plus</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-img4">
+                        <i class="fas fa-car floating"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Soutien aux producteurs agricoles</h3>
+                        <p>Nous achetons les récoltes à prix équitable, offrant un débouché stable aux paysans locaux.</p>
+                        <a href="#" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Qui somme-nous?</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-image"></div>
+                    <div class="about-text">
+                        <h3>Qui somme-nous?</h3>
+                        <p>KN FFF Nzopi est une société agro-industrielle créée pour valoriser la production céréalière du Haut-Uélé.</p>
+                        <h3>Promoteur:</h3>
+                        <p>Chrysostome K ONDOGO</p>
+                        <h3>Localisation:</h3>
+                        <p>Nzopi, Territoire de Faradje, RDC</p>
+                        <h3>Mission:</h3>
+                        <p>Offrir des produits céréaliers de qualité à prix abordable, tout en soutenant les producteurs locaux et en créant des emplois durables.</p>
+                        <h3>Valeurs:</h3>
+                        <p>Qualité - Proximité - Impact social</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#services">Nos services</a></li>
+                        <li><a href="#apropos">Nos produits</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#RCCM">RCCM & mention légales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links footer-contact">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links footer-contact">
+                    <h4>Coordonnées</h4>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <p>+243 821 363 626</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <p>kozianzopi@yahoo.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <p>Nzopi, Territoire de Faradje, Haut-Uélé RDC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Arnold kana Tous droits réservés.</p>
+            </div>
+        </footer>
+
+        <script>
+            // Mobile menu toggle
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const nav = document.querySelector('nav');
+            
+            mobileMenu.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+            
+            // Close menu when clicking a link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 90,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.hero-content, .section-title, .service-card, .project-card, .about-content, .about-img, .contact-info, .contact-form, .form-group, .social-icon, .btn');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.classList.add('animate');
+                    }
+                });
+            };
+            
+            // Initial check and then on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+            
+            // Trigger hero animations after page load
+            setTimeout(() => {
+                const heroContent = document.querySelector('.hero-content');
+                const heroBtns = document.querySelectorAll('.btn');
+                const heroP = document.querySelector('.hero p');
+                
+                if (heroContent) heroContent.classList.add('animate');
+                if (heroBtns) {
+                    heroBtns.forEach((btn, index) => {
+                        setTimeout(() => {
+                            btn.classList.add('animate');
+                        }, 200 * index);
+                    });
+                }
+                if (heroP) heroP.classList.add('animate');
+            }, 500);
+            
+            // Animate contact items sequentially
+            setTimeout(() => {
+                const contactItems = document.querySelectorAll('.contact-item');
+                const socialIcons = document.querySelectorAll('.social-icon');
+                const formGroups = document.querySelectorAll('.form-group');
+                
+                contactItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, 200 * index);
+                });
+                
+                socialIcons.forEach((icon, index) => {
+                    setTimeout(() => {
+                        icon.classList.add('animate');
+                    }, 200 * index);
+                });
+                
+                formGroups.forEach((group, index) => {
+                    setTimeout(() => {
+                        group.classList.add('animate');
+                    }, 200 * index);
+                });
+            }, 1000);
+            
+            // Floating animation for elements with class 'floating'
+            const floatingElements = document.querySelectorAll('.floating');
+            floatingElements.forEach(element => {
+                element.style.animationDelay = `${Math.random() * 2}s`;
+            });
+
+            // Form submission handling (version corrigée)
+            const contactForm = document.getElementById('contact-form');
+            const formMessages = document.getElementById('form-messages');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.textContent = 'Envoi en cours...';
+                    submitButton.disabled = true;
+                    
+                    // Create FormData object
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        service: document.getElementById('service').value,
+                        message: document.getElementById('message').value
+                    };
+                    
+                    // Envoyer les données au format JSON
+                    fetch('https://formspree.io/f/mdkdykra', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Erreur réseau');
+                        }
+                    })
+                    .then(data => {
+                        // Reset button
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false;
+                        
+                        // Show success message
+                        formMessages.innerHTML = `
+                            <div class="message success-message">
+                                <i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès !
+                            </div>
+                        `;
+                        
+                        // Clear form
+                        contactForm.reset();
+                        
+                        // Scroll to messages
+                        formMessages.scrollIntoView({ behavior: 'smooth' });
+                    })
+                    .catch(error => {
+                        // Reset button
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false;
+                        
+                        // Show error message
+                        formMessages.innerHTML = `
+                            <div class="message error-message">
+                                <i class="fas fa-exclamation-circle"></i> Une erreur s'est produite. Veuillez réessayer plus tard.
+                            </div>
+                        `;
+                        
+                        console.error('Erreur:', error);
+                    });
+                });
+            }
+        </script>
+        
+    </body>
+</html>

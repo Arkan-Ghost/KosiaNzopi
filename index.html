@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minoterie de Kosia Nzopi - Transformation céréalière locale</title>
+    <style>
+        :root {
+            --primary-color: #2c5e1a;
+            --secondary-color: #f8a726;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/hero-bg.jpg') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e69500;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Mission Section */
+        .mission {
+            background-color: var(--light-color);
+        }
+        
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .mission-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-card i {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .mission-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* Products Section */
+        .products {
+            background-color: white;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .product-info p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 18px;
+        }
+        
+        .order-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .order-btn:hover {
+            background-color: #1e4a12;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--light-color);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+        }
+        
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 200px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay i {
+            color: white;
+            font-size: 30px;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            height: 100%;
+            width: 2px;
+            background-color: var(--secondary-color);
+            z-index: 1;
+        }
+        
+        .process-step {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex-grow: 1;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Map Section */
+        .map-section {
+            height: 500px;
+            background-color: #eee;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Order Section */
+        .order {
+            background-color: var(--light-color);
+        }
+        
+        .order-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .order-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .product-select {
+            margin-bottom: 30px;
+        }
+        
+        .product-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-option:last-child {
+            border-bottom: none;
+        }
+        
+        .product-info-small {
+            flex: 1;
+        }
+        
+        .product-info-small h4 {
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+        
+        .product-info-small p {
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-item i {
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        .contact-text h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin-left: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .btn-outline {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.jpg" alt="Logo Minoterie Nzopi">
+                    <span>Minoterie <span>Kosia Nzopi</span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#products">Produits</a></li>
+                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#process">Processus</a></li>
+                    <li><a href="#order">Commander</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Transformation céréalière locale de qualité</h1>
+            <p>Valorisation des productions agricoles du Haut-Uélé pour une sécurité alimentaire durable</p>
+            <div>
+                <a href="#order" class="btn">Commander maintenant</a>
+                <a href="#about" class="btn btn-outline">Découvrir notre entreprise</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>À propos de nous</h2>
+                <p>Une unité industrielle de transformation céréalière implantée à Nzopi, Territoire de Faradje, Province du Haut-Uélé en RDC</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Notre histoire</h3>
+                    <p>La Minoterie de Nzopi (Kosia Nzopi Farm & Fish Farming) a été créée par Chrysostome KANA ONDOGO, entrepreneur et porteur de projets agro-industriels intégrés, avec pour objectif de transformer localement les céréales cultivées dans la région.</p>
+                    <p>Notre mission est d'offrir à la population de Nzopi et des zones avoisinantes un accès permanent à des produits céréaliers transformés localement, de qualité, à un prix abordable.</p>
+                    <p>Nous stimulons l'agriculture paysanne, créons des emplois et renforçons la sécurité alimentaire en RDC.</p>
+                    <a href="#contact" class="btn">Nous contacter</a>
+                </div>
+                <div class="about-image">
+                    <img src="images/about2.png" alt="Minoterie de Nzopi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre mission et objectifs</h2>
+                <p>Nous nous engageons à transformer l'agriculture locale et à améliorer la sécurité alimentaire</p>
+            </div>
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Transformer localement</h3>
+                    <p>Transformer sur place les productions agricoles des paysans (paddy, maïs, sorgho, soya) pour valoriser les ressources locales.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Réduire les importations</h3>
+                    <p>Diminuer la dépendance aux produits importés (farine, riz) souvent chers et de qualité incertaine.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-bread-slice"></i>
+                    <h3>Produits sains et abordables</h3>
+                    <p>Offrir des produits alimentaires sains, abordables et disponibles toute l'année pour la population locale.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-people-carry"></i>
+                    <h3>Créer des emplois</h3>
+                    <p>Générer une dizaine d'emplois directs et de nombreux emplois indirects dans la région.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos produits</h2>
+                <p>Des produits céréaliers de qualité transformés localement à partir des ressources agricoles de la région</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/rizblanc.png" alt="Riz blanc">
+                    </div>
+                    <div class="product-info">
+                        <h3>Riz blanc</h3>
+                        <p>Riz de qualité supérieure bien décortiqué et calibré, prêt à la consommation.</p>
+                        <p class="price">0,75 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/famais.jpg" alt="Semoule de maïs">
+                    </div>
+                    <div class="product-info">
+                        <h3>Semoule de maïs</h3>
+                        <p>Semoule fine de maïs local, idéale pour la préparation de bouillies et autres plats traditionnels.</p>
+                        <p class="price">0,65 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/fasorgho.png" alt="Farine de sorgho">
+                    </div>
+                    <div class="product-info">
+                        <h3>Farine de sorgho</h3>
+                        <p>Farine nutritive obtenue à partir de sorgho cultivé dans la région, riche en fibres.</p>
+                        <p class="price">0,70 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/soja.png" alt="Farine de soja">
+                    </div>
+                    <div class="product-info">
+                        <h3>Farine de soja</h3>
+                        <p>Farine protéinée issue du soja local, parfaite pour enrichir les préparations culinaires.</p>
+                        <p class="price">0,70 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/alimsilure.png" alt="Sous-produits">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sous-produits</h3>
+                        <p>Sons et brisures pour l'alimentation animale (volaille et pisciculture).</p>
+                        <p class="price">0,25 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Alimtilapia.jpg" alt="Sous-produits">
+                    </div>
+                    <div class="product-info">
+                        <h3>Allim. Poisson Tilapia</h3>
+                        <p>Sons et brisures pour l'alimentation animale (volaille et pisciculture).</p>
+                        <p class="price">0,25 USD/kg</p>
+                        <a href="#order" class="order-btn">Commander</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Témoignages</h2>
+                <p>Ce que nos clients disent de nos produits</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <img src="images/client1.png" alt="Client">
+                    <p>"Le riz de la Minoterie de Nzopi est d'une qualité exceptionnelle. Bien décortiqué et sans impuretés. Ma famille l'adore!"</p>
+                    <h4>Jean Mbuta</h4>
+                    <p>Commerçant à Faradje</p>
+                </div>
+                <div class="testimonial">
+                    <img src="images/client2.jpeg" alt="Client">
+                    <p>"La semoule de maïs est parfaite pour préparer notre bouillie traditionnelle. Le goût est bien meilleur que les produits importés."</p>
+                    <h4>Marie Kambale</h4>
+                    <p>Mère de famille à Nzopi</p>
+                </div>
+                <div class="testimonial">
+                    <img src="images/client3.jpeg" alt="Client">
+                    <p>"En tant qu'éleveur, les sous-produits de la minoterie sont essentiels pour nourrir mes volailles à un prix abordable."</p>
+                    <h4>Paul Lokana</h4>
+                    <p>Éleveur à Watsa</p>
+                </div>
+                <div class="testimonial-slider-controls">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galerie photos</h2>
+                <p>Découvrez nos installations et notre processus de production</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery1.jpg" alt="Installations">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery2.jpg" alt="Équipements">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery3.jpg" alt="Production">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery4.jpg" alt="Produits finis">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery5.jpg" alt="Distribution">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery6.jpg" alt="Équipe">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery7.jpg" alt="Équipe">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img src="" alt="Image agrandie">
+        </div>
+    </div>
+
+    <!-- Process Section -->
+    <section class="section" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre processus de transformation</h2>
+                <p>Découvrez comment nous transformons les céréales locales en produits de qualité</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Réception et pesage</h3>
+                        <p>Nous recevons et pesons soigneusement les matières premières (paddy, maïs, sorgho, soya) directement des producteurs locaux.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Nettoyage et dépoussiérage</h3>
+                        <p>Les céréales sont nettoyées et dépoussiérées pour éliminer toutes les impuretés avant transformation.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Décorticage</h3>
+                        <p>Le riz (paddy), le sorgho ou le maïs sont décortiqués pour séparer les grains de leur enveloppe.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Broyage et mouture</h3>
+                        <p>Les grains sont broyés ou moulus pour obtenir la texture souhaitée (farine, semoule ou riz blanc).</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Tamisage et calibrage</h3>
+                        <p>Les produits finis sont tamisés et calibrés pour garantir une qualité homogène.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Emballage</h3>
+                        <p>Les produits sont emballés dans des sacs de 5kg, 10kg ou 25kg, étiquetés et prêts pour la distribution.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>Stockage et distribution</h3>
+                        <p>Les produits finis sont stockés dans des conditions optimales avant d'être distribués dans la région.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section map-section">
+        <div id="map"></div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="section order" id="order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Commander nos produits</h2>
+                <p>Remplissez le formulaire pour passer votre commande</p>
+            </div>
+            <div class="order-container">
+                <div class="order-form">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="order-name">Nom complet</label>
+                            <input type="text" id="order-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-email">Email</label>
+                            <input type="email" id="order-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-phone">Téléphone</label>
+                            <input type="tel" id="order-phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-address">Adresse de livraison</label>
+                            <textarea id="order-address" name="address" required></textarea>
+                        </div>
+                        
+                        <div class="product-select">
+                            <h3>Sélectionnez vos produits</h3>
+                            
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Riz blanc</h4>
+                                    <p>0,75 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.75" data-name="Riz blanc">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Semoule de maïs</h4>
+                                    <p>0,65 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.65" data-name="Semoule de maïs">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Farine de sorgho</h4>
+                                    <p>0,70 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.70" data-name="Farine de sorgho">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Farine de soja</h4>
+                                    <p>0,70 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.70" data-name="Farine de soja">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Sous-produits</h4>
+                                    <p>0,25 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.25" data-name="Sous-produits">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+
+                            <div class="product-option">
+                                <div class="product-info-small">
+                                    <h4>Allim. Poisson Tilapia</h4>
+                                    <p>0,25 USD/kg</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button type="button" class="decrease">-</button>
+                                    <input type="number" min="0" value="0" data-price="0.25" data-name="Sous-produits">
+                                    <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                        </div>Allim. Poisson Tilapia
+                        
+                        <div class="form-group">
+                            <label for="order-message">Instructions spéciales</label>
+                            <textarea id="order-message" name="message"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Total: <span id="order-total">0</span> USD</label>
+                        </div>
+                        
+                        <button type="submit" class="btn">Passer la commande</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-text">
+                            <h3>Adresse</h3>
+                            <p>Nzopi, Territoire de Faradje<br>Haut-Uélé, République Démocratique du Congo</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="contact-text">
+                            <h3>Téléphone</h3>
+                            <p>+243 821 363 626</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>kosianzopi@yahoo.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-text">
+                            <h3>Heures d'ouverture</h3>
+                            <p>Lundi - Vendredi: 8h00 - 17h00<br>Samedi: 8h00 - 13h00</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-truck"></i>
+                        <div class="contact-text">
+                            <h3>Livraison</h3>
+                            <p>Nous livrons dans toute la région du Haut-Uélé. Les commandes sont traitées dans les 48 heures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-nous</h2>
+                <p>Nous sommes à votre disposition pour toute question ou demande d'information</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-text">
+                            <h3>Adresse</h3>
+                            <p>Nzopi, Territoire de Faradje<br>Haut-Uélé, République Démocratique du Congo</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="contact-text">
+                            <h3>Téléphone</h3>
+                            <p>+243 821 363 626</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>kosianzopi@yahoo.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-text">
+                            <h3>Heures d'ouverture</h3>
+                            <p>Lundi - Vendredi: 8h00 - 17h00<br>Samedi: 8h00 - 13h00</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-share-alt"></i>
+                        <div class="contact-text">
+                            <h3>Réseaux sociaux</h3>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/profile.php?id=100054224872189"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="https://wa.me/243821363626"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Minoterie Nzopi</h3>
+                    <p>Unité industrielle de transformation céréalière implantée à Nzopi, valorisant les productions agricoles locales pour une sécurité alimentaire durable.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/19wBtZVfTQ/?mibextid=xfxF2i"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/243821363626"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#products">Produits</a></li>
+                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#process">Processus</a></li>
+                        <li><a href="#order">Commander</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Nos produits</h3>
+                    <ul class="footer-links">
+                        <li><a href="#products">Riz blanc</a></li>
+                        <li><a href="#products">Semoule de maïs</a></li>
+                        <li><a href="#products">Farine de sorgho</a></li>
+                        <li><a href="#products">Farine de soja</a></li>
+                        <li><a href="#products">Sous-produits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Nzopi, Faradje, Haut-Uélé, RDC</p>
+                    <p><i class="fas fa-phone-alt"></i> +243 821 363 626</p>
+                    <p><i class="fas fa-envelope"></i> kosianzopi@yahoo.com</p>
+                    <p><i class="fas fa-clock"></i> Lun-Ven: 8h-17h | Sam: 8h-13h</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Arnold Kana. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showTestimonial(index);
+            });
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').getAttribute('src');
+                lightboxImg.setAttribute('src', imgSrc);
+                lightbox.classList.add('active');
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+        
+        // Initialize Map
+        function initMap() {
+            // Coordinates for Nzopi, Faradje (approximate)
+            const nzopi = [3.2790812, 29.5878590];
+            
+            const map = L.map('map').setView(nzopi, 13);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            L.marker(nzopi).addTo(map)
+                .bindPopup('Minoterie de Nzopi<br>Territoire de Faradje, Haut-Uélé')
+                .openPopup();
+        }
+        
+        // Initialize map when page loads
+        window.addEventListener('load', initMap);
+        
+        // Order Form Functionality
+        const quantityInputs = document.querySelectorAll('.quantity-control input');
+        const decreaseBtns = document.querySelectorAll('.quantity-control .decrease');
+        const increaseBtns = document.querySelectorAll('.quantity-control .increase');
+        const orderTotal = document.getElementById('order-total');
+        
+        function updateOrderTotal() {
+            let total = 0;
+            
+            quantityInputs.forEach(input => {
+                const quantity = parseInt(input.value);
+                const price = parseFloat(input.getAttribute('data-price'));
+                total += quantity * price;
+            });
+            
+            orderTotal.textContent = total.toFixed(2);
+        }
+        
+        decreaseBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.nextElementSibling;
+                if (parseInt(input.value) > 0) {
+                    input.value = parseInt(input.value) - 1;
+                    updateOrderTotal();
+                }
+            });
+        });
+        
+        increaseBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                input.value = parseInt(input.value) + 1;
+                updateOrderTotal();
+            });
+        });
+        
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', updateOrderTotal);
+        });
+        
+        // Form Submissions
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send the form data to a server
+                // For this example, we'll just show an alert
+                alert(`Merci ${name} pour votre message! Nous vous contacterons bientôt à l'adresse ${email}.`);
+                
+                // Reset the form
+                contactForm.reset();
+            });
+        }
+        
+        const orderForm = document.getElementById('orderForm');
+        
+        if (orderForm) {
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('order-name').value;
+                const email = document.getElementById('order-email').value;
+                const phone = document.getElementById('order-phone').value;
+                const address = document.getElementById('order-address').value;
+                const instructions = document.getElementById('order-message').value;
+                
+                // Get order items
+                const items = [];
+                quantityInputs.forEach(input => {
+                    const quantity = parseInt(input.value);
+                    if (quantity > 0) {
+                        items.push({
+                            name: input.getAttribute('data-name'),
+                            quantity: quantity,
+                            price: parseFloat(input.getAttribute('data-price'))
+                        });
+                    }
+                });
+                
+                if (items.length === 0) {
+                    alert('Veuillez sélectionner au moins un produit.');
+                    return;
+                }
+                
+                // Here you would typically send the order data to a server
+                // For this example, we'll just show an alert with order summary
+                let orderSummary = `Merci ${name} pour votre commande!\n\n`;
+                orderSummary += `Détails de la commande:\n`;
+                
+                items.forEach(item => {
+                    orderSummary += `${item.name}: ${item.quantity}kg x ${item.price} USD = ${(item.quantity * item.price).toFixed(2)} USD\n`;
+                });
+                
+                orderSummary += `\nTotal: ${orderTotal.textContent} USD\n`;
+                orderSummary += `Livraison à: ${address}\n`;
+                
+                if (instructions) {
+                    orderSummary += `\nInstructions: ${instructions}`;
+                }
+                
+                orderSummary += `\n\nNous vous contacterons sous peu pour confirmer votre commande.`;
+                
+                alert(orderSummary);
+                
+                // Reset the form
+                orderForm.reset();
+                quantityInputs.forEach(input => input.value = '0');
+                updateOrderTotal();
+            });
+        }
+        
+        // Scroll reveal animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const sections = document.querySelectorAll('.section, .mission-card, .product-card, .process-step, .gallery-item');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 100) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize elements with opacity 0 for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section, .mission-card, .product-card, .process-step, .gallery-item');
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Trigger initial reveal
+            setTimeout(revealOnScroll, 100);
+        });
+    </script>
+</body>
+</html>
