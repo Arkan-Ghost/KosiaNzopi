@@ -823,6 +823,9 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -983,8 +986,8 @@
                         <img src="images/F2AlimT.png" alt="Sous-produits">
                     </div>
                     <div class="product-info">
-                        <h3>Allim. Poisson Tilapia</h3>
-                        <p>Sons et brisures pour l'alimentation animale (volaille et pisciculture).</p>
+                        <h3>Aliment flottant Poisson Tilapia</h3>
+                        <p>Aliments formulés et préparés par extrusion afin de flotter sur l’eau pendant un bon moment, destinés aux poissons Tilapias.</p>
                         <p class="price">2,5 USD/kg</p>
                         <a href="#order" class="order-btn">Commander</a>
                     </div>
@@ -1248,7 +1251,7 @@
 
                             <div class="product-option">
                                 <div class="product-info-small">
-                                    <h4>Allim. Poisson Tilapia</h4>
+                                    <h4>Aliment Poisson Tilapia</h4>
                                     <p>2,50 USD/kg</p>
                                 </div>
                                 <div class="quantity-control">
@@ -1257,7 +1260,7 @@
                                     <button type="button" class="increase">+</button>
                                 </div>
                             </div>
-                        </div>Allim. Poisson Tilapia
+                        </div>
                         
                         <div class="form-group">
                             <label for="order-message">Instructions spéciales</label>
@@ -1442,7 +1445,11 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // ========== CONFIGURATION EMAILJS ==========
+        emailjs.init("vLZu0CFGbGutQb0xR");
+
         // Mobile Navigation
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
@@ -1544,6 +1551,8 @@
         
         // Initialize map when page loads
         window.addEventListener('load', initMap);
+
+        // ========== SYSTÈME DE COMMANDE (NOUVEAU) ==========
         
         // Order Form Functionality
         const quantityInputs = document.querySelectorAll('.quantity-control input');
@@ -1585,84 +1594,292 @@
             input.addEventListener('change', updateOrderTotal);
         });
         
-        // Form Submissions
+        // ========== FORMULAIRE CONTACTEZ-NOUS ==========
+
         const contactForm = document.getElementById('contactForm');
-        
+
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Get form values
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
+                // Afficher le chargement
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                submitBtn.disabled = true;
                 
-                // Here you would typically send the form data to a server
-                // For this example, we'll just show an alert
-                alert(`Merci ${name} pour votre message! Nous vous contacterons bientôt à l'adresse ${email}.`);
-                
-                // Reset the form
-                contactForm.reset();
+                try {
+                    // Récupérer les valeurs du formulaire
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Paramètres pour EmailJS
+                    const templateParams = {
+                        to_email: 'kosianzopi@yahoo.com',
+                        from_name: name,
+                        from_email: email,
+                        client_phone: phone || 'Non renseigné',
+                        subject: subject,
+                        message: message,
+                        date: new Date().toLocaleString('fr-FR')
+                    };
+                    
+                    // Envoyer l'email via EmailJS
+                    const response = await emailjs.send(
+                        'service_jhn0kqf', // Votre Service ID
+                        'template_62js3zp', // Votre Template ID pour contact
+                        templateParams
+                    );
+                    
+                    // Succès
+                    alert(`✅ Message envoyé avec succès, ${name} !\n\nNous vous répondrons dans les plus brefs délais à l'adresse ${email}.`);
+                    
+                    // Réinitialiser le formulaire
+                    contactForm.reset();
+                    
+                } catch (error) {
+                    console.error('Erreur envoi message:', error);
+                    alert('❌ Une erreur est survenue lors de l\'envoi du message.\n\nVeuillez nous appeler directement au +243 821 363 626.');
+                } finally {
+                    // Réactiver le bouton
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
             });
         }
+            
+
+        // ========== SYSTÈME DE COMMANDE EMAIL + WHATSAPP ==========
         
-        const orderForm = document.getElementById('orderForm');
-        
-        if (orderForm) {
-            orderForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+        // Fonction principale de soumission de commande
+        async function submitOrder(event) {
+            event.preventDefault();
+            
+            // Validation du formulaire
+            if (!validateOrderForm()) {
+                return;
+            }
+            
+            // Collecte des données
+            const orderData = collectOrderData();
+            
+            try {
+                // Afficher un indicateur de chargement
+                showLoading(true);
                 
-                // Get form values
-                const name = document.getElementById('order-name').value;
-                const email = document.getElementById('order-email').value;
-                const phone = document.getElementById('order-phone').value;
-                const address = document.getElementById('order-address').value;
-                const instructions = document.getElementById('order-message').value;
+                // Envoi simultané Email + WhatsApp
+                await Promise.all([
+                    sendEmailNotification(orderData),
+                    sendWhatsAppNotification(orderData) // CORRIGÉ : utilise sendWhatsAppNotification
+                ]);
                 
-                // Get order items
-                const items = [];
-                quantityInputs.forEach(input => {
-                    const quantity = parseInt(input.value);
-                    if (quantity > 0) {
-                        items.push({
-                            name: input.getAttribute('data-name'),
-                            quantity: quantity,
-                            price: parseFloat(input.getAttribute('data-price'))
-                        });
-                    }
-                });
+                // Succès
+                showSuccessMessage();
+                resetOrderForm();
                 
-                if (items.length === 0) {
-                    alert('Veuillez sélectionner au moins un produit.');
-                    return;
+            } catch (error) {
+                console.error('Erreur envoi commande:', error);
+                // Fallback - au moins WhatsApp va fonctionner
+                sendWhatsAppNotification(orderData);
+                showSuccessMessage();
+                resetOrderForm();
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Validation du formulaire de commande
+        function validateOrderForm() {
+            const name = document.getElementById('order-name').value.trim();
+            const phone = document.getElementById('order-phone').value.trim();
+            const address = document.getElementById('order-address').value.trim();
+            
+            if (!name) {
+                alert('Veuillez entrer votre nom complet.');
+                document.getElementById('order-name').focus();
+                return false;
+            }
+            
+            if (!phone) {
+                alert('Veuillez entrer votre numéro de téléphone.');
+                document.getElementById('order-phone').focus();
+                return false;
+            }
+            
+            if (!address) {
+                alert('Veuillez entrer votre adresse de livraison.');
+                document.getElementById('order-address').focus();
+                return false;
+            }
+            
+            // Vérifier qu'au moins un produit est commandé
+            const hasItems = Array.from(document.querySelectorAll('.quantity-control input'))
+                .some(input => parseInt(input.value) > 0);
+            
+            if (!hasItems) {
+                alert('Veuillez sélectionner au moins un produit.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Collecte des données de commande
+        function collectOrderData() {
+            const items = [];
+            const quantityInputs = document.querySelectorAll('.quantity-control input');
+            
+            quantityInputs.forEach(input => {
+                const quantity = parseInt(input.value);
+                if (quantity > 0) {
+                    items.push({
+                        name: input.getAttribute('data-name'),
+                        quantity: quantity,
+                        price: parseFloat(input.getAttribute('data-price')),
+                        total: (quantity * parseFloat(input.getAttribute('data-price'))).toFixed(2)
+                    });
                 }
-                
-                // Here you would typically send the order data to a server
-                // For this example, we'll just show an alert with order summary
-                let orderSummary = `Merci ${name} pour votre commande!\n\n`;
-                orderSummary += `Détails de la commande:\n`;
-                
-                items.forEach(item => {
-                    orderSummary += `${item.name}: ${item.quantity}kg x ${item.price} USD = ${(item.quantity * item.price).toFixed(2)} USD\n`;
-                });
-                
-                orderSummary += `\nTotal: ${orderTotal.textContent} USD\n`;
-                orderSummary += `Livraison à: ${address}\n`;
-                
-                if (instructions) {
-                    orderSummary += `\nInstructions: ${instructions}`;
-                }
-                
-                orderSummary += `\n\nNous vous contacterons sous peu pour confirmer votre commande.`;
-                
-                alert(orderSummary);
-                
-                // Reset the form
-                orderForm.reset();
-                quantityInputs.forEach(input => input.value = '0');
-                updateOrderTotal();
             });
+            
+            return {
+                name: document.getElementById('order-name').value.trim(),
+                email: document.getElementById('order-email').value.trim(),
+                phone: document.getElementById('order-phone').value.trim(),
+                address: document.getElementById('order-address').value.trim(),
+                message: document.getElementById('order-message').value.trim(),
+                items: items,
+                total: document.getElementById('order-total').textContent,
+                date: new Date().toLocaleString('fr-FR'),
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        // Envoi par Email avec EmailJS
+        async function sendEmailNotification(orderData) {
+            const templateParams = {
+                to_email: 'kosianzopi@gmail.com',
+                from_name: orderData.name,
+                from_email: orderData.email || 'non-renseigné',
+                client_phone: orderData.phone,
+                delivery_address: orderData.address,
+                special_instructions: orderData.message || 'Aucune instruction spéciale',
+                order_items: formatItemsForEmail(orderData.items),
+                total_amount: orderData.total,
+                order_date: orderData.date,
+                client_email: orderData.email || 'Non renseigné'
+            };
+            
+            try {
+                const response = await emailjs.send(
+                    'service_jhn0kqf',
+                    'template_b1gzu3p', 
+                    templateParams
+                );
+                
+                console.log('Email envoyé avec succès:', response);
+                return response;
+                
+            } catch (error) {
+                console.error('Erreur envoi email:', error);
+                throw error;
+            }
+        }
+
+        // Formatage des articles pour l'email
+        function formatItemsForEmail(items) {
+            if (items.length === 0) return 'Aucun article';
+            
+            return items.map(item => 
+                `• ${item.name}: ${item.quantity}kg × ${item.price} USD = ${item.total} USD`
+            ).join('\n');
+        }
+
+        // Version sécurisée - WhatsApp rapide avec fermeture automatique
+        async function sendWhatsAppNotification(orderData) {
+            const phone = "243821363626"; // Numéro WhatsApp du destinataire
+            
+            const message = `🛒 NOUVELLE COMMANDE - MINOTERIE NZOPI
+
+        👤 Client: ${orderData.name}
+        📞 Téléphone: ${orderData.phone}
+        📍 Adresse: ${orderData.address}
+
+        📦 COMMANDE:
+        ${formatItemsForWhatsApp(orderData.items)}
+
+        💰 Total: ${orderData.total} USD
+        📋 Instructions: ${orderData.message || 'Aucune'}
+
+        ⏰ ${orderData.date}
+
+        _Message automatique - Ne pas modifier_`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+            
+            // Ouvrir et fermer rapidement
+            const whatsappWindow = window.open(whatsappUrl, '_blank');
+            
+            // Fermer après 3 secondes (WhatsApp est déjà ouvert)
+            setTimeout(() => {
+                if (whatsappWindow && !whatsappWindow.closed) {
+                    whatsappWindow.close();
+                }
+            }, 3000);
+            
+            return Promise.resolve();
+        }
+
+        // Formatage pour WhatsApp
+        function formatItemsForWhatsApp(items) {
+            if (items.length === 0) return 'Aucun article';
+            
+            return items.map(item => 
+                `• ${item.name}: ${item.quantity}kg × ${item.price} USD = ${item.total} USD`
+            ).join('\n');
+        }
+
+        // Affichage du chargement
+        function showLoading(show) {
+            const submitBtn = document.querySelector('#orderForm button[type="submit"]');
+            
+            if (show) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.innerHTML = 'Passer la commande';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Message de succès
+        function showSuccessMessage() {
+            alert(`✅ Commande envoyée avec succès !
+
+            Nous avons reçu votre commande par email et WhatsApp.
+            Nous vous contacterons dans les plus brefs délais pour confirmer la livraison.
+
+            📞 Vous pouvez aussi nous appeler au +243 821 363 626 pour toute urgence.
+
+            Merci pour votre confiance !`);
+        }
+
+        // Réinitialisation du formulaire
+        function resetOrderForm() {
+            document.getElementById('orderForm').reset();
+            
+            const quantityInputs = document.querySelectorAll('.quantity-control input');
+            quantityInputs.forEach(input => input.value = '0');
+            updateOrderTotal();
+        }
+
+        // Application du nouveau système de commande
+        const orderForm = document.getElementById('orderForm');
+        if (orderForm) {
+            orderForm.addEventListener('submit', submitOrder);
         }
         
         // Scroll reveal animation
